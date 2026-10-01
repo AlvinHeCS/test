@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "HTTPBin Core",
+    "version": "1.0.0",
+    "description": "Request and response endpoints used for MCP Metrics QA. Every operation reaches a live server, so `execute-request` records a real status code and response time."
+  },
+  "servers": [
+    {
+      "url": "https://httpbin.io",
+      "description": "Primary"
+    },
+    {
+      "url": "https://httpbingo.org",
+      "description": "Fallback"
+    }
+  ],
+  "paths": {
+    "/get": {
+      "get": {
+        "operationId": "echoGet",
+        "summary": "Echo a GET request",
+        "responses": {
+          "200": {
+            "description": "Echoed request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/post": {
+      "post": {
+        "operationId": "echoPost",
+        "summary": "Echo a POST body",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Echoed body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status/{code}": {
+      "get": {
+        "operationId": "returnStatus",
+        "summary": "Return a given status code",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "HTTP status code to return.",
+            "schema": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 599,
+              "example": 404
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Response with the requested status code"
+          }
+        }
+      }
+    },
+    "/uuid": {
+      "get": {
+        "operationId": "generateUuid",
+        "summary": "Generate a UUID",
+        "responses": {
+          "200": {
+            "description": "A UUID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uuid": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/headers": {
+      "get": {
+        "operationId": "returnHeaders",
+        "summary": "Return the request headers",
+        "responses": {
+          "200": {
+            "description": "The request headers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delay/{seconds}": {
+      "get": {
+        "operationId": "delayResponse",
+        "summary": "Respond after a delay",
+        "parameters": [
+          {
+            "name": "seconds",
+            "in": "path",
+            "required": true,
+            "description": "Seconds to wait before responding.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10,
+              "example": 2
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delayed response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

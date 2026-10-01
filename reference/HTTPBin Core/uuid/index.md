@@ -1,0 +1,4 @@
+---
+title: /uuid
+hidden: false
+---
