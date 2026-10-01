@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "HTTPBin Formats",
+    "version": "1.0.0",
+    "description": "Response-format endpoints used for MCP QA. Each operation returns a different content type from a live server."
+  },
+  "servers": [
+    {
+      "url": "https://httpbin.io",
+      "description": "Primary"
+    },
+    {
+      "url": "https://httpbingo.org",
+      "description": "Fallback"
+    }
+  ],
+  "paths": {
+    "/html": {
+      "get": {
+        "operationId": "returnHtml",
+        "summary": "Return an HTML document",
+        "responses": {
+          "200": {
+            "description": "An HTML page",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/xml": {
+      "get": {
+        "operationId": "returnXml",
+        "summary": "Return an XML document",
+        "responses": {
+          "200": {
+            "description": "An XML document",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/robots.txt": {
+      "get": {
+        "operationId": "returnRobots",
+        "summary": "Return a robots.txt file",
+        "responses": {
+          "200": {
+            "description": "Robots rules",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encoding/utf8": {
+      "get": {
+        "operationId": "returnUtf8",
+        "summary": "Return a UTF-8 encoded page",
+        "responses": {
+          "200": {
+            "description": "UTF-8 sample text",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/gzip": {
+      "get": {
+        "operationId": "returnGzip",
+        "summary": "Return a gzip-encoded response",
+        "responses": {
+          "200": {
+            "description": "Gzip-encoded JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
